@@ -1,4 +1,4 @@
-a) URL aplikacije : 
+a) URL aplikacije : https://web2-fifth-project-book-library.onrender.com
 
 b) Upute za lokalno pokretanje:
 	1. Raspakirati .zip datoteku
@@ -7,6 +7,18 @@ b) Upute za lokalno pokretanje:
 	4. Aplikacija će biti dostupna na adresi koja se ispiše u terminalu (obično http://localhost:5173)
 
 c) Lista svojstva:
+
+	** NAPOMENA **
+   	Iako su na predavanjima prikazani primjeri koristeći Options API (data, methods, computed blokovi), 
+		ovaj projekt je izrađen koristeći Composition API, pošto nam je bilo rečeno da možemo birati između dva pristupa.
+		U ovom pristupu:
+			- Funkcije definirane u <script setup> ili unutar Pinia Actions zamjenjuju klasični "methods" blok
+			- "ref" i "reactive" varijable zamjenjuju "data()" funkciju
+			- "computed()" funkcija zamjenjuje "computed" blok
+         
+   ** OPIS MOGUĆNOSTI APLIKACIJE **
+		Ova aplikacija služi kao osobna knjižnica koja omogućuje pregled, pretraživanje i spremanje omiljenih knjiga u listu favorita.
+      Detaljima knjige pristupa se klikom na naslov knjige.
 
 1. interpolation/one-way binding - Da, src/components/BookCard.vue, linije 28, 30 i 31 (prikaz naslova i autora knjige)
 
