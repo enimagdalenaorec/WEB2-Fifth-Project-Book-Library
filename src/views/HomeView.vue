@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useBookStore } from '../stores/bookStore'
+import BookCard from '../components/BookCard.vue'
 
 const bookStore = useBookStore()
 
@@ -63,24 +64,14 @@ onMounted(async () => {
       <p class="results-count">Showing {{ filteredBooks.length }} books</p>
       
       <div class="book-grid">
-        <div v-for="book in filteredBooks" :key="book.id" class="book-card">
-          <div class="book-info">
-            <RouterLink :to="'/book/' + book.id" class="book-link">
-            <h3>{{ book.title }}</h3>
-            </RouterLink>
-            <span class="author">by {{ book.author }}</span>
-            <p class="description">{{ book.description }}</p>
-          </div>
-          
-          <button 
-            @click="addToFavorites(book)" 
-            :disabled="bookStore.favorites.some(f => f.id === book.id)"
-            class="btn-add"
-          >
-            {{ bookStore.favorites.some(f => f.id === book.id) ? 'Already in Favorites' : 'Add to Favorites' }}
-          </button>
+        <BookCard 
+            v-for="book in filteredBooks" 
+            :key="book.id" 
+            :book="book"
+            :is-favorite="bookStore.favorites.some(f => f.id === book.id)"
+            @button-clicked="addToFavorites(book)"
+        />
         </div>
-      </div>
     </div>
 
     <Transition name="toast">
