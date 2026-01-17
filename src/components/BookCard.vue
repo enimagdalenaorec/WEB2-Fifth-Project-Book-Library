@@ -1,5 +1,4 @@
 <script setup>
-// PROPS: Komponenta prima objekt 'book' i tekst za gumb
 defineProps({
   book: {
     type: Object,
@@ -15,7 +14,6 @@ defineProps({
   }
 })
 
-// EMITS: Komponenta javlja roditelju da je gumb kliknut
 const emit = defineEmits(['button-clicked'])
 
 const handleAction = () => {
@@ -44,7 +42,6 @@ const handleAction = () => {
 </template>
 
 <style scoped>
-/* Tu prebaci onaj CSS za .book-card, .author, .btn-action itd. koji smo koristili */
 .book-card {
   background: white;
   border-radius: 15px;
@@ -106,7 +103,6 @@ h3 {
   cursor: not-allowed;
 }
 
-/* Stil za gumb kad je crven (Remove) */
 .btn-remove {
   background-color: #ff4757;
 }

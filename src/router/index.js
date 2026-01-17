@@ -16,9 +16,9 @@ const router = createRouter({
       component: () => import('../views/FavoritesView.vue')
     },
     {
-      path: '/book/:id', // :id je dinamički parametar
+      path: '/book/:id', 
       name: 'book-details',
-      component: () => import('../views/BookDetailsView.vue') // Lazy loading
+      component: () => import('../views/BookDetailsView.vue') 
     },
     // catch-all 404 stranica
     {

@@ -16,7 +16,6 @@ import { RouterLink, RouterView } from 'vue-router'
 </template>
 
 <style>
-/* Globalni stilovi za font - profesor traži pedantnost */
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -53,12 +52,10 @@ body {
   color: #42b983;
 }
 
-/* Stil za aktivni link (One-way binding od routera) */
 .router-link-active {
   color: #42b983;
 }
 
-/* Mala crtica ispod aktivnog linka za bolji UI */
 .router-link-active::after {
   content: '';
   position: absolute;

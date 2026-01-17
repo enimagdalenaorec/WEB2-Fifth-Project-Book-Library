@@ -1,7 +1,7 @@
 <script setup>
 import { useBookStore } from '../stores/bookStore'
 import { RouterLink } from 'vue-router'
-import BookCard from '../components/BookCard.vue' // Uvozimo našu novu komponentu
+import BookCard from '../components/BookCard.vue' 
 
 const bookStore = useBookStore()
 
@@ -37,7 +37,6 @@ const handleRemove = (bookId) => {
 </template>
 
 <style scoped>
-/* Primijeti koliko je CSS-a sada manje ovdje jer je većina u BookCard.vue */
 .container {
   max-width: 1000px;
   margin: 0 auto;

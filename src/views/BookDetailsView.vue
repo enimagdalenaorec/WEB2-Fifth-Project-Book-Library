@@ -1,28 +1,37 @@
 <script setup>
-import { computed } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { computed, onMounted } from 'vue'
+import { useRoute, useRouter, RouterLink } from 'vue-router'
 import { useBookStore } from '../stores/bookStore'
 
-const route = useRoute()   // Pristup podacima u URL-u
-const router = useRouter() // Omogućuje nam navigaciju (npr. povratak)
+const route = useRoute()
+const router = useRouter()
 const bookStore = useBookStore()
 
-// Dohvaćamo ID iz URL-a (npr. iz /book/5 uzimamo broj 5)
 const bookId = Number(route.params.id)
 
-// Pronalazimo knjigu u našem store-u koja ima taj ID
+onMounted(async () => {
+  if (bookStore.books.length === 0) {
+    await bookStore.fetchBooks()
+  }
+})
+
 const book = computed(() => {
   return bookStore.books.find(b => b.id === bookId)
 })
 
 const goBack = () => {
-  router.back() // Vraća korisnika na prethodnu stranicu
+  router.back()
 }
 </script>
 
 <template>
   <div class="container">
-    <div v-if="book" class="details-card">
+    <div v-if="bookStore.loading" class="loader">
+      <div class="spinner"></div>
+      <p>Fetching book details...</p>
+    </div>
+
+    <div v-else-if="book" class="details-card">
       <button @click="goBack" class="btn-back">← Back to Gallery</button>
       
       <div class="content">
@@ -49,7 +58,7 @@ const goBack = () => {
 
     <div v-else class="not-found">
       <h2>Oops! Book not found.</h2>
-      <p>The book you are looking for doesn't exist in our library.</p>
+      <p>The book with ID "{{ bookId }}" doesn't exist in our library.</p>
       <RouterLink to="/" class="btn-back">Return to Home</RouterLink>
     </div>
   </div>
@@ -92,6 +101,7 @@ h1 {
   font-size: 3rem;
   margin: 10px 0;
   color: #2c3e50;
+  font-weight: 800;
 }
 
 .author {
@@ -117,21 +127,47 @@ h1 {
 .btn-add {
   width: 100%;
   padding: 15px;
-  background: #42b983;
+  background-color: #42b983;
   color: white;
   border: none;
   border-radius: 10px;
   font-size: 1.1rem;
   font-weight: bold;
   cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-add:hover:not(:disabled) {
+  background-color: #3aa876;
 }
 
 .btn-add:disabled {
-  background: #bdc3c7;
+  background-color: #bdc3c7;
+  cursor: not-allowed;
 }
 
 .not-found {
   text-align: center;
   padding: 100px 0;
+}
+
+.loader {
+  text-align: center;
+  padding: 100px 0;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #42b983;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 </style>

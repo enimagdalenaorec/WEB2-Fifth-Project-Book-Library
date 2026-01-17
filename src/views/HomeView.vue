@@ -5,14 +5,11 @@ import BookCard from '../components/BookCard.vue'
 
 const bookStore = useBookStore()
 
-// TWO-WAY BINDING: varijabla povezana s input poljem
 const searchQuery = ref('')
 
-// Logika za Toast Notifikaciju
 const showToast = ref(false)
 const toastMessage = ref('')
 
-// COMPUTED PROPERTY: automatski filtrira listu čim se searchQuery promijeni
 const filteredBooks = computed(() => {
   const query = searchQuery.value.toLowerCase() 
   return bookStore.books.filter(book => 
@@ -21,7 +18,6 @@ const filteredBooks = computed(() => {
   )
 })
 
-// Metoda za dodavanje u favorite s vizualnim feedbackom
 const addToFavorites = (book) => {
   bookStore.addToFavorites(book)
   toastMessage.value = `Added "${book.title}" to favorites!`
@@ -31,7 +27,6 @@ const addToFavorites = (book) => {
   }, 3000)
 }
 
-// LIFECYCLE HOOK: Asinkroni dohvat podataka pri učitavanju
 onMounted(async () => {
   if (bookStore.books.length === 0) {
     await bookStore.fetchBooks()
@@ -83,7 +78,6 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-/* KONTEJNER I TIPOGRAFIJA */
 .container {
   max-width: 1000px;
   margin: 0 auto;
@@ -102,7 +96,6 @@ h1 {
   font-weight: 800;
 }
 
-/* SEARCH BAR */
 .search-input {
   width: 100%;
   max-width: 500px;
@@ -119,7 +112,6 @@ h1 {
   box-shadow: 0 0 10px rgba(66, 185, 131, 0.1);
 }
 
-/* MREŽA KNJIGA */
 .book-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -163,7 +155,6 @@ h3 {
   line-height: 1.5;
 }
 
-/* GUMB S HOVER EFEKTOM */
 .btn-add {
   background-color: #42b983;
   color: white;
@@ -187,7 +178,6 @@ h3 {
   cursor: not-allowed;
 }
 
-/* TOAST NOTIFIKACIJA */
 .toast-notification {
   position: fixed;
   bottom: 30px;
@@ -202,7 +192,6 @@ h3 {
   font-weight: bold;
 }
 
-/* ANIMACIJA ZA TOAST */
 .toast-enter-active, .toast-leave-active {
   transition: all 0.4s ease;
 }
